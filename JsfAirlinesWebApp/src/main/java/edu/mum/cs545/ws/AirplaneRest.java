@@ -28,7 +28,7 @@ public class AirplaneRest {
 	
 	@GET
 	@Path("listAll")
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
 	public List<Airplane> findAll(){
 		return airplaneService.findAll();
 		
