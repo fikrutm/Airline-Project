@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+<h:head>
+	<title>Flight List</title>
+</h:head>
+<h:body>
+	<h2>Flight List</h2>
+	<h:form>
+		<h:form>
+			<h:commandLink action="index?faces-redirect=true">
+				<h:outputText value="Home"></h:outputText>
+			</h:commandLink>
+		</h:form>
+
+		<br></br>
+
+		<br></br>
+		<h:form>
+			<h:outputText value="Search By "></h:outputText>&nbsp;
+			<h:commandButton value="Search">
+				<f:ajax listener="#{filterFlight.SearchFlight()}" execute="@form"
+					render="list" />
+			</h:commandButton>
+			<br />
+			<br />
+	Airline Name:
+	<h:inputText id="airlineName"
+				value="#{filterFlight.flightQuery.airlineName}"></h:inputText>
+			<br />
+			<br />
+	Airport Origin:
+	<h:inputText id="originAirportCod"
+				value="#{filterFlight.flightQuery.originAirportCode}"></h:inputText>
+			<br />
+			<br />
+	Destination Airport Code:
+	<h:inputText id="destinatinAirportCode"
+				value="#{filterFlight.flightQuery.destinationAirportCode}"></h:inputText>
+		</h:form>
+
+		<br />
+		<br />
+
+	</h:form>
+
+	<h:form>
+		<h1>All Airlines</h1>
+
+
+		<h:dataTable value="#{airlineService.findAll()}" var="a">
+
+
+
+			<h:column>
+				<f:facet name="header">Airlines</f:facet>
+				<h1>#{a.getName()} Airline</h1>
+				<h:form>
+
+					<h:commandLink value="Delete Airline"
+						action="#{airlineService.delete(a)}" />
+				</h:form>
+
+				<h:dataTable value="#{a.getFlights()}" var="f">
+					<h:column>
+						<f:facet name="header">Flight Number</f:facet>
+    				
+    				#{f.getFlightnr()}
+                
+    			</h:column>
+
+					<h:column>
+						<f:facet name="header">Airline</f:facet>
+    				#{f.getAirline().getName()}
+    			</h:column>
+
+					<h:column>
+						<f:facet name="header">Origin </f:facet>
+    				#{f.getOrigin().getName()}
+    			</h:column>
+
+					<h:column>
+						<f:facet name="header">Arrival</f:facet>
+    				#{f.getDestination().getName()}
+    			</h:column>
+					<h:column>
+						<f:facet name="header">Departure Date</f:facet>
+    				#{f.getDepartureDate()}
+    			</h:column>
+					<h:column>
+						<f:facet name="header">Departure Times</f:facet>
+    				#{f.getDepartureTime()}
+    			</h:column>
+
+					<h:column>
+						<f:facet name="header">Airplaine Model</f:facet>
+    				#{f.getAirplane().getModel()}
+    			</h:column>
+					<h:column>
+						<f:facet name="header">Capacity</f:facet>
+    			
+                  #{f.getAirplane().getCapacity()}
+    				
+    			</h:column>
+					<h:column>
+						<h:form>
+
+							<h:commandLink value="Delete flight"
+								action="#{a.removeFlight(f)}" />
+
+						</h:form>
+					</h:column>
+				</h:dataTable>
+
+			</h:column>
+
+		</h:dataTable>
+
+
+	</h:form>
+
+</h:body>
+</html>
+
