@@ -6,95 +6,89 @@
 	xmlns:h="http://xmlns.jcp.org/jsf/html">
 
 <h:head>
-
+	<title>Flight List</title>
 </h:head>
 <h:body>
 	<h2>Flight List</h2>
 	<h:form>
-		<h:dataTable value="#{flightService.findAll}" var="flgights"
-			border="1">
+		<h:form>
+			<h:commandLink action="index?faces-redirect=true">
+				<h:outputText value="Home"></h:outputText>
+			</h:commandLink>
+		</h:form>
+
+		<br></br>
+
+		<br></br>
+		<h:form>
+			<h:outputText value="Search By "></h:outputText>&nbsp;
+			<h:commandButton value="Search">
+				<f:ajax listener="#{filterFlight.SearchFlight()}" execute="@form"
+					render="list" />
+			</h:commandButton>
+			<br />
+			<br />
+	Airline Name:
+	<h:inputText id="airlineName"
+				value="#{filterFlight.flightQuery.airlineName}"></h:inputText>
+			<br />
+			<br />
+	Airport Origin:
+	<h:inputText id="originAirportCod"
+				value="#{filterFlight.flightQuery.originAirportCode}"></h:inputText>
+			<br />
+			<br />
+	Destination Airport Code:
+	<h:inputText id="destinatinAirportCode"
+				value="#{filterFlight.flightQuery.destinationAirportCode}"></h:inputText>
+		</h:form>
+
+		<br />
+		<br />
+
+	</h:form>
+
+	<h:form>
+		<h:dataTable value="#{filterFlight.listFlight}" var="flight" id="list"
+			boder="1">
 			<h:column>
 				<f:facet name="header">
 					<h:outputText value=" Flight Number" />
-				</f:facet>
-				<h:outputText value="#{flights.flightnr}" />
-			</h:column>
+				</f:facet>#{flight.flightnr}
+		</h:column>
 			<h:column>
 				<f:facet name="header">
 					<h:outputText value=" Airline Name" />
-				</f:facet>
-				<h:outputText value="#{flights.airline.name}" />
-			</h:column>
+				</f:facet>#{flight.airline.name}
+		</h:column>
+			<h:column>
+				<f:facet name="header"> Departure DateTimes</f:facet>#{flight.departureDate} #{flight.departureTime}
+		</h:column>
 
 			<h:column>
-				<f:facet name="header">
-					<h:outputText value="Departure Date" />
-				</f:facet>
-				<h:outputText value="#{flights.departureDate}" />
-			</h:column>
+				<f:facet name="header">Arrival DateTimes</f:facet>#{flight.arrivalDate}&nbsp;&nbsp; #{flight.arrivalTime}
+		</h:column>
+			<h:column>
+				<f:facet name="header">Origin Airport</f:facet>(#{flight.origin.airportcode})#{flight.origin.name}
+		</h:column>
+			<h:column>
+				<f:facet name="header">Destination Airports</f:facet>(#{flight.destination.airportcode})#{flight.destination.name}
+		</h:column>
+			<h:column>
+				<f:facet name="header">Airplane Model</f:facet>#{flight.airplane.model}
+		</h:column>
+			<h:column>
+				<f:facet name="header">Airplane Capacity</f:facet>#{flight.airplane.capacity}
+		</h:column>
+			<h:column>
+				<f:facet name="header">Action</f:facet>
+				<h:commandLink value="Delete flight" action="#{flight.removeFlight(flight)}" />
 
-
-			<h:column>
-				<f:facet name="header">
-					<h:outputText value="Departure Time" />
-				</f:facet>
-				<h:outputText value="#{flights.departureTime}" />
-			</h:column>
-
-			<h:column>
-				<f:facet name="header">
-					<h:outputText value="Arrival Date" />
-				</f:facet>
-				<h:outputText value="#{flights.arrivalDate}" />
-			</h:column>
-
-			<h:column>
-				<f:facet name="header">
-					<h:outputText value="Arrival Time" />
-				</f:facet>
-				<h:outputText value="#{flights.arrivalTime}" />
-			</h:column>
-
-			<h:column>
-				<f:facet name="header">
-					<h:outputText value="Origin Airport Code" />
-				</f:facet>
-				<h:outputText value="#{flights.origin.airportcode}" />
-			</h:column>
-
-			<h:column>
-				<f:facet name="header">
-					<h:outputText value="Origin Airport Name" />
-				</f:facet>
-				<h:outputText value="#{flights.origin.name}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">
-					<h:outputText value="Destination Airport Code" />
-				</f:facet>
-				<h:outputText value="#{flights.destination.ariportcode}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">
-					<h:outputText value="Destination Airport Name" />
-				</f:facet>
-				<h:outputText value="#{flights.destination.name}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">
-					<h:outputText value="Airport Model" />
-				</f:facet>
-				<h:outputText value="#{flights.airplane.model}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">
-					<h:outputText value="Airplane Capacity" />
-				</f:facet>
-				<h:outputText value="#{flights.airplane.capacity}" />
 			</h:column>
 
 		</h:dataTable>
 	</h:form>
+
 </h:body>
 </html>
 

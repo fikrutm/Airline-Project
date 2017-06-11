@@ -10,13 +10,13 @@
 <h:body>
 	<h2>Airplane List</h2>
 	<h:form>
-		<h:dataTable value="#{airlineRestClient.findAll()}" var="airplanes">
+		<h:dataTable value="#{airplaneService.findAll()}" var="airplanes" border="1">
 
 			<h:column>
 				<f:facet name="header">
 					<h:outputText value="Airplane ID" />
 				</f:facet>
-				<h:outputText value="" />
+				<h:outputText value="#{airplanes.id}" />
 			</h:column>
 
 			<h:column>

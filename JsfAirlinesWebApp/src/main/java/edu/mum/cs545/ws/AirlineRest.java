@@ -12,6 +12,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import cs545.airline.model.Airline;
@@ -31,7 +32,7 @@ public class AirlineRest {
 		List<Airline> listOfAirlines = airlineService.findAll();
 		return listOfAirlines;
 	}
-
+/*
 	@POST
 	@Path("create")
 	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
@@ -59,10 +60,10 @@ public class AirlineRest {
 		airlineService.delete(name);
 		
 	}
-	/*
+	
 	@GET
 	@Path("list/{airline}")
-	public Airline find(@PathParam("airline")Airline airline) {
+	public Airline find(@QueryParam("airline")Airline airline) {
 		return airlineService.find(airline);
 	}
 
@@ -78,6 +79,6 @@ public class AirlineRest {
 	@Path("listAll/{flight}")
 	public List<Airline> findByFlight(@PathParam("flight")Flight flight) {
 		return airlineService.findByFlight(flight);
-	}
-*/
+	}*/
+
 }

@@ -35,13 +35,13 @@ public class FlightRest {
 		return flightService.findAll();
 	}
 
-	@POST
+	/*@POST
 	@Path("create")
 	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 	public void create(Flight flight) {
 		flightService.create(flight);
 
-	}
+	}*/
 
 	@PUT
 	@Path("update")

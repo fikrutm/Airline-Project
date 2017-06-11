@@ -14,8 +14,13 @@
 <h:body>
 	<h2>Airline List</h2>
 	<h:form>
+	<h:commandButton value ="Add Airline" action="createAirline.xhtml"/>
+	</h:form>
+	<br/><br/>
+	
+	<h:form>
 
-		<h:dataTable value="#{airlineService.findAll}" var="airline"
+		<h:dataTable value="#{airlineService.findAll()}" var="airline"
 			border="1">
 			<h:column>
 				<f:facet name="header">
@@ -40,8 +45,7 @@
 				</f:facet>
 
 				<h:commandLink value="Delete"
-					action="#{airlineervice.deleteAction(airline)}" />
-
+					action="#{airlineService.delete(airline)}" />
 			</h:column>
 
 			<!-- Edit airline -->
@@ -49,49 +53,36 @@
 
 				<f:facet name="header">Action</f:facet>
 
-				<h:commandLink value="Edit" action="#{order.update(airline.id)}"
-					rendered="#{not airline.editable}" />
+			<!-- 	<h:commandLink value="Edit" action="#{airlineService.update(airline)}"
+					rendered="#{not airline.}" /> -->
 
 			</h:column>
+
+			<!-- Edit airline -->
 		</h:dataTable>
-
-
-		<!--  test 
+	</h:form>
+	<!--  test 
  <ui:repeat value="#{app.service.findAll}" var="value">
    
    <h:outputText value="#{value}"/>  <br />
-</ui:repeat>
- 
- 
-  -->
+</ui:repeat>-->
 
 
 
-	</h:form>
+	<!-- </h:form>
+	<h:panelGrid>
+	<h:column>
+
+				<f:facet name="header">Action</f:facet>
+
+				<h:commandLink value="Ed" action=""/>
+					rendered="#{not airline.editable}" />
+
+			</h:column>
+	</h:panelGrid> </h:form>-->
+
 </h:body>
 </html>
 
-
-
-
-
-<!-- <!DOCTYPE html>
-<html>
-<head>
-<title>Web Service</title>
-</head>
-
-<body>
-The Server is up!
-
-Rest Services are at
-/rs/hello
-/rs/hello/airline
-
-
-
-</body>
-
-</html> -->
 
 

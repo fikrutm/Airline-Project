@@ -11,7 +11,7 @@
 <h:body>
 	<h2>Airport List</h2>
 	<h:form>
-		<h:dataTable value="#{airportService.findAll}" var="airport"
+		<h:dataTable value="#{airportService.findAll()}" var="airport"
 			border="1">
 			<h:column>
 				<f:facet name="header">
