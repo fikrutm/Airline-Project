@@ -1,94 +1,90 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:h="http://xmlns.jcp.org/jsf/html">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
 
 <h:head>
-	<title>Flight List</title>
+	<title>Flight Form</title>
+	<h:outputStylesheet library="css" name="table-style.css"  />
 </h:head>
 <h:body>
-	<h2>Flight List</h2>
 	<h:form>
-		<h:form>
-			<h:commandLink action="index?faces-redirect=true">
-				<h:outputText value="Home"></h:outputText>
-			</h:commandLink>
-		</h:form>
+		<h1>Flight List</h1>
 
 		<br></br>
-
 		<br></br>
-		<h:form>
-			<h:outputText value="Search By "></h:outputText>&nbsp;
-			<h:commandButton value="Search">
-				<f:ajax listener="#{filterFlight.SearchFlight()}" execute="@form"
-					render="list" />
-			</h:commandButton>
-			<br />
-			<br />
-	Airline Name:
-	<h:inputText id="airlineName"
-				value="#{filterFlight.flightQuery.airlineName}"></h:inputText>
-			<br />
-			<br />
-	Airport Origin:
-	<h:inputText id="originAirportCod"
-				value="#{filterFlight.flightQuery.originAirportCode}"></h:inputText>
-			<br />
-			<br />
-	Destination Airport Code:
-	<h:inputText id="destinatinAirportCode"
-				value="#{filterFlight.flightQuery.destinationAirportCode}"></h:inputText>
-		</h:form>
-
-		<br />
-		<br />
+		
+		<h:outputText value="Filter flight By: "/>	&nbps;	<h:commandButton value="search">
+			<f:ajax listener="#{filterFlights.SearchFlight()}" execute="@form"
+				render="list" />
+		</h:commandButton>
+		
+		<br></br>
+		<br></br>
+	 Airline Name:
+ 	<h:inputText id="airlineName_id"
+			value="#{filterFlights.flightQuery.airlineName}">
+		</h:inputText>
+		<br></br>
+		<br></br>
+ 	Origin Airport:
+ 	<h:inputText id="originAirportCode_id"
+			value="#{filterFlights.flightQuery.originAirportCode}">
+		</h:inputText>
+		<br></br>
+		<br></br>
+ 	 Destination AirportCode:
+ 	<h:inputText id="destinationAirportCode_id"
+			value="#{filterFlights.flightQuery.destinationAirportCode}">
+		</h:inputText>
+		<br></br>
+		<br></br>
 
 	</h:form>
+	<h:dataTable value="#{filterFlights.listFlight}" var="flights" id="list"
+		border="1"
+		
+		styleClass="order-table"
+    			headerClass="order-table-header"
+    			rowClasses="order-table-odd-row,order-table-even-row"
+		
+		>
+		<h:column>
+			<f:facet name="header">Flight Number</f:facet>#{flights.flightnr}
+		</h:column>
+		<h:column>
+			<f:facet name="header">Airline</f:facet>#{flights.airline.name}
+		</h:column>
+		<h:column>
+			<f:facet name="header">Departure DateTimes</f:facet>#{flights.departureDate} #{flights.departureTime}
+		</h:column>
+		<h:column>
+			<f:facet name="header">Arrival DateTimes</f:facet>#{flights.arrivalDate} #{flights.arrivalTime}
+		</h:column>
+		<h:column>
+			<f:facet name="header">Origin Airports</f:facet>(#{flights.origin.airportcode})#{flights.origin.name}
+		</h:column>
+		<h:column>
+			<f:facet name="header">Destination Airports</f:facet>(#{flights.destination.airportcode})#{flights.destination.name}
+		</h:column>
+		<h:column>
+			<f:facet name="header">Model</f:facet>#{flights.airplane.model}
+		</h:column>
+		<h:column>
+			<f:facet name="header">Capacity</f:facet>#{flights.airplane.capacity}
+		</h:column>
+		  <h:column>
+                    <h:form>
+    				<f:facet name="header" >Action</f:facet>
+    				<h:commandLink value="Delete" action="#{flights.airline.removeFlight(flights)}" />
+                  
+    				</h:form>
+    		</h:column>
 
-	<h:form>
-		<h:dataTable value="#{filterFlight.listFlight}" var="flight" id="list"
-			boder="1">
-			<h:column>
-				<f:facet name="header">
-					<h:outputText value=" Flight Number" />
-				</f:facet>#{flight.flightnr}
-		</h:column>
-			<h:column>
-				<f:facet name="header">
-					<h:outputText value=" Airline Name" />
-				</f:facet>#{flight.airline.name}
-		</h:column>
-			<h:column>
-				<f:facet name="header"> Departure DateTimes</f:facet>#{flight.departureDate} #{flight.departureTime}
-		</h:column>
+	</h:dataTable>
 
-			<h:column>
-				<f:facet name="header">Arrival DateTimes</f:facet>#{flight.arrivalDate}&nbsp;&nbsp; #{flight.arrivalTime}
-		</h:column>
-			<h:column>
-				<f:facet name="header">Origin Airport</f:facet>(#{flight.origin.airportcode})#{flight.origin.name}
-		</h:column>
-			<h:column>
-				<f:facet name="header">Destination Airports</f:facet>(#{flight.destination.airportcode})#{flight.destination.name}
-		</h:column>
-			<h:column>
-				<f:facet name="header">Airplane Model</f:facet>#{flight.airplane.model}
-		</h:column>
-			<h:column>
-				<f:facet name="header">Airplane Capacity</f:facet>#{flight.airplane.capacity}
-		</h:column>
-			<h:column>
-				<f:facet name="header">Action</f:facet>
-				<h:commandLink value="Delete flight" action="#{flight.removeFlight(flight)}" />
-
-			</h:column>
-
-		</h:dataTable>
-	</h:form>
 
 </h:body>
 </html>
-

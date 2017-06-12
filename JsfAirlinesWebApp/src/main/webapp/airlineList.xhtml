@@ -7,9 +7,9 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:head>
-	<title>Airline List</title>
-</h:head>
-
+      <title>Airline List</title>
+  <h:outputStylesheet library="css" name="table-style.css"  />
+   </h:head>
 
 <h:body>
 	<h2>Airline List</h2>
@@ -21,7 +21,9 @@
 	<h:form>
 
 		<h:dataTable value="#{airlineService.findAll()}" var="airline"
-			border="1">
+			border="1" styleClass="order-table"
+    			headerClass="order-table-header"
+    			rowClasses="order-table-odd-row,order-table-even-row"	>
 			<h:column>
 				<f:facet name="header">
 					<h:outputText value="Id" />
@@ -53,34 +55,14 @@
 
 				<f:facet name="header">Action</f:facet>
 
-			<!-- 	<h:commandLink value="Edit" action="#{airlineService.update(airline)}"
-					rendered="#{not airline.}" /> -->
+			 	<h:commandLink value="Edit" action="#{airlineService.update(airline)}"
+					rendered="true" /> 
 
 			</h:column>
 
-			<!-- Edit airline -->
-		</h:dataTable>
+				</h:dataTable>
 	</h:form>
-	<!--  test 
- <ui:repeat value="#{app.service.findAll}" var="value">
-   
-   <h:outputText value="#{value}"/>  <br />
-</ui:repeat>-->
-
-
-
-	<!-- </h:form>
-	<h:panelGrid>
-	<h:column>
-
-				<f:facet name="header">Action</f:facet>
-
-				<h:commandLink value="Ed" action=""/>
-					rendered="#{not airline.editable}" />
-
-			</h:column>
-	</h:panelGrid> </h:form>-->
-
+	
 </h:body>
 </html>
 

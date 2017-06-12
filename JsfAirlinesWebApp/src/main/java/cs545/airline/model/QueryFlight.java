@@ -1,7 +1,8 @@
 package cs545.airline.model;
 
-public class QueryFlight {
-private String originAirportCode;
+
+ public class QueryFlight{
+	private String originAirportCode;
 	
 	private String destinationAirportCode;
 	
@@ -42,5 +43,7 @@ private String originAirportCode;
 	public void setSearchBy(String searchBy) {
 		this.searchBy = searchBy;
 	}
+	
+	
 	
 }

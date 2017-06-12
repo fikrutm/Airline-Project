@@ -51,6 +51,8 @@
 			<artifactId>derbyclient</artifactId>
 			<version>10.13.1.1</version>
 		</dependency>
-
 	</dependencies>
+	<build>
+		<finalName>JsfAirlinesWebApp</finalName>
+	</build>
 </project>

@@ -12,15 +12,54 @@
 
 
 <h:body>
-	<h2>Save Airline</h2>
+	<h2>Create Airline</h2>
+
 	<h:form>
 		<h:outputLabel>Airplane Name:</h:outputLabel>
-		<h:inputText id="name" value="#{airline.name}" required="true" />
+		<h:inputText id="name" value="#{filterFlight.flightQuery.airlineName}"
+			required="true" />
 		<h:message for="name" style="color:red" />
-		<br/><br/>
-		<h:outputText value="  " /><h:commandButton value="Save"  action="index.xhtml"/> <h:outputText value="  " />
-		<h:commandButton value="Cancel" action="index.xhtml" immediate="true" />
+		<br />
+		<br />
+
+		<h:commandButton value="Save">
+
+			<f:ajax listener="#{filterService.createAirline()}" execute="@form"
+				render="list" /> 
+		</h:commandButton>
+	
+		<br />
+		<br />
+			
 	</h:form>
+
+
+	<h:dataTable value="#{airlineService.findAll()}" var="airline"
+		id="list" border="1">
+
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="Id" />
+			</f:facet>
+				#{airline.id}
+			</h:column>
+
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="Airline Name" />
+			</f:facet>
+			<h:outputText value="#{airline.name}" />
+		</h:column>
+
+		<h:column>
+			<f:facet name="header">Action</f:facet>
+					
+				<h:commandButton action="#{filterFlight.deleteAirline(airline)}" value ="Delete"></h:commandButton>
+			
+		</h:column>
+
+	</h:dataTable>
+
 </h:body>
 </html>
 
